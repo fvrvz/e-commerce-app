@@ -5,8 +5,8 @@ spring:
       password: ${MONGODB_PASSWORD}
       host: localhost
       port: 27017
-      database: customer
-      authentication-database: admin
+      database: ${MONGODB_CUSTOMER_SERVICE_DB}
+      authentication-database: ${MONGODB_CUSTOMER_SERVICE_AUTH_DB}
 server:
   port: 8090
 
