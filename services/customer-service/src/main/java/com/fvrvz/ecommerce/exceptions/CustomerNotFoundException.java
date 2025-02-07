@@ -1,4 +1,4 @@
-package com.fvrvz.customer_service.exceptions;
+package com.fvrvz.ecommerce.exceptions;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.fvrvz.customer_service.models;
+package com.fvrvz.ecommerce.models;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;

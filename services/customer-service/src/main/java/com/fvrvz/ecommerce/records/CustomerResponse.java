@@ -1,6 +1,6 @@
-package com.fvrvz.customer_service.records;
+package com.fvrvz.ecommerce.records;
 
-import com.fvrvz.customer_service.models.Address;
+import com.fvrvz.ecommerce.models.Address;
 
 public record CustomerResponse(
         String id,

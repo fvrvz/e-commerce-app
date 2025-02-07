@@ -1,11 +1,11 @@
-package com.fvrvz.customer_service.services;
+package com.fvrvz.ecommerce.services;
 
-import com.fvrvz.customer_service.exceptions.CustomerNotFoundException;
-import com.fvrvz.customer_service.mappers.CustomerMapper;
-import com.fvrvz.customer_service.models.Customer;
-import com.fvrvz.customer_service.records.CustomerRequest;
-import com.fvrvz.customer_service.records.CustomerResponse;
-import com.fvrvz.customer_service.repositories.CustomerRepository;
+import com.fvrvz.ecommerce.exceptions.CustomerNotFoundException;
+import com.fvrvz.ecommerce.mappers.CustomerMapper;
+import com.fvrvz.ecommerce.models.Customer;
+import com.fvrvz.ecommerce.records.CustomerRequest;
+import com.fvrvz.ecommerce.records.CustomerResponse;
+import com.fvrvz.ecommerce.repositories.CustomerRepository;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

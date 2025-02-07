@@ -1,4 +1,4 @@
-package com.fvrvz.customer_service.handlers;
+package com.fvrvz.ecommerce.handlers;
 
 import java.util.Map;
 

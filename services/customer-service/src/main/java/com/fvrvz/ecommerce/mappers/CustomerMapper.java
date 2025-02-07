@@ -1,8 +1,8 @@
-package com.fvrvz.customer_service.mappers;
+package com.fvrvz.ecommerce.mappers;
 
-import com.fvrvz.customer_service.models.Customer;
-import com.fvrvz.customer_service.records.CustomerRequest;
-import com.fvrvz.customer_service.records.CustomerResponse;
+import com.fvrvz.ecommerce.models.Customer;
+import com.fvrvz.ecommerce.records.CustomerRequest;
+import com.fvrvz.ecommerce.records.CustomerResponse;
 import org.springframework.stereotype.Service;
 
 @Service

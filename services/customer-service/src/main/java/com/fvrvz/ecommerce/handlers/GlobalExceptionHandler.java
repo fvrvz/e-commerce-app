@@ -1,6 +1,6 @@
-package com.fvrvz.customer_service.handlers;
+package com.fvrvz.ecommerce.handlers;
 
-import com.fvrvz.customer_service.exceptions.CustomerNotFoundException;
+import com.fvrvz.ecommerce.exceptions.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

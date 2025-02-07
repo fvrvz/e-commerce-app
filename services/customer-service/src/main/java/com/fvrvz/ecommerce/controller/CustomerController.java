@@ -1,8 +1,8 @@
-package com.fvrvz.customer_service.controller;
+package com.fvrvz.ecommerce.controller;
 
-import com.fvrvz.customer_service.records.CustomerRequest;
-import com.fvrvz.customer_service.records.CustomerResponse;
-import com.fvrvz.customer_service.services.CustomerService;
+import com.fvrvz.ecommerce.records.CustomerRequest;
+import com.fvrvz.ecommerce.records.CustomerResponse;
+import com.fvrvz.ecommerce.services.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
