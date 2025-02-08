@@ -3,20 +3,20 @@ server:
 spring:
   data:
     mongodb:
-      username: ${MONGODB_USERNAME}
-      password: ${MONGODB_PASSWORD}
+      username: admin
+      password: admin
       host: localhost
       port: 27017
-      database: ${MONGODB_NOTIFICATION_SERVICE_DB}
-      authentication-database: ${MONGODB_NOTIFICATION_SERVICE_AUTH_DB}
+      database: notification
+      authentication-database: admin
     kafka:
       consumer:
         bootstrap-servers:
           - localhost:9092
-        group-id: paymentGroup,orderGroup
+        #        group-id: paymentGroup,orderGroup
         auto-offset-reset: earliest
-        key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-        value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
         properties:
           spring.json.trusted.packages: 'com.fvrvz.ecommerce'
           spring.json.type.mapping: paymentConfirmation:com.fvrvz.ecommerce.records.PaymentNotificationRequest,orderConfirmation:com.fvrvz.ecommerce.records.OrderConfirmation
