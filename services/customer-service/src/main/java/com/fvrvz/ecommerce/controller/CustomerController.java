@@ -14,39 +14,39 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 public class CustomerController {
     @Autowired
-    CustomerService customerService;
+    private CustomerService _customerService;
 
     @PostMapping
     public ResponseEntity<String> createCustomer(
             @RequestBody @Valid CustomerRequest request
     ) {
-        return ResponseEntity.ok(this.customerService.createCustomer(request));
+        return ResponseEntity.ok(this._customerService.createCustomer(request));
     }
 
     @PutMapping
     public ResponseEntity<Void> updateCustomer(
             @RequestBody @Valid CustomerRequest request
     ) {
-        this.customerService.updateCustomer(request);
+        this._customerService.updateCustomer(request);
         return ResponseEntity.accepted().build();
     }
 
     @GetMapping
     public ResponseEntity<List<CustomerResponse>> getAllCustomers() {
-        List<CustomerResponse> customers = this.customerService.findAllCustomers();
+        List<CustomerResponse> customers = this._customerService.findAllCustomers();
         return ResponseEntity.ok(customers);
     }
 
     @GetMapping("/{customer-id}")
     public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable("customer-id") String customerId) {
-        return ResponseEntity.ok(this.customerService.findCustomerById(customerId));
+        return ResponseEntity.ok(this._customerService.findCustomerById(customerId));
     }
 
     @DeleteMapping("/{customer-id}")
     public ResponseEntity<Void> deleteCustomer(
             @PathVariable("customer-id") String customerId
     ) {
-        this.customerService.deleteCustomer(customerId);
+        this._customerService.deleteCustomer(customerId);
         return ResponseEntity.accepted().build();
     }
 }

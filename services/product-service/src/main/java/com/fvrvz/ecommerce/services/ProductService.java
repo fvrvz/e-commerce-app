@@ -22,14 +22,14 @@ import static java.lang.String.format;
 @Service
 public class ProductService {
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository _productRepository;
 
     @Autowired
-    ProductMapper productMapper;
+    private ProductMapper _productMapper;
 
     public Integer createProduct(@Valid ProductRequest request) {
-        var product = productMapper.toProduct(request);
-        return productRepository.save(product).getId();
+        var product = this._productMapper.toProduct(request);
+        return this._productRepository.save(product).getId();
     }
 
     public List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
@@ -37,7 +37,7 @@ public class ProductService {
                 .stream()
                 .map(ProductPurchaseRequest::productId)
                 .toList();
-        var storedProducts = productRepository.findAllByIdInOrderById(productIds);
+        var storedProducts = this._productRepository.findAllByIdInOrderById(productIds);
         if (productIds.size() != storedProducts.size()) {
             throw new ProductPurchaseException("One or more products does not exists");
         }
@@ -56,22 +56,22 @@ public class ProductService {
             }
             var newAvailableQuantity = product.getAvailableQuantity() - productRequest.quantity();
             product.setAvailableQuantity(newAvailableQuantity);
-            productRepository.save(product);
-            purchasedProducts.add(this.productMapper.toProductPurchaseResponse(product, productRequest.quantity()));
+            this._productRepository.save(product);
+            purchasedProducts.add(this._productMapper.toProductPurchaseResponse(product, productRequest.quantity()));
         }
 
         return purchasedProducts;
     }
 
     public ProductResponse findById(String productId) {
-        return this.productRepository.findById(productId)
-                .map(productMapper::toProductResponse)
+        return this._productRepository.findById(productId)
+                .map(this._productMapper::toProductResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format("Product not found with ID: %s", productId)));
     }
 
     public List<ProductResponse> findAll() {
-        return this.productRepository.findAll()
-                .stream().map(productMapper::toProductResponse)
+        return this._productRepository.findAll()
+                .stream().map(this._productMapper::toProductResponse)
                 .collect(Collectors.toList());
     }
 }

@@ -20,24 +20,24 @@ import static java.lang.String.format;
 public class CustomerService {
 
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository _customerRepository;
 
     @Autowired
-    CustomerMapper customerMapper;
+    private CustomerMapper _customerMapper;
 
     public String createCustomer(CustomerRequest request) {
-        var customer = customerRepository.save(customerMapper.toCustomer(request));
+        var customer = this._customerRepository.save(this._customerMapper.toCustomer(request));
         return customer.getId();
     }
 
     public void updateCustomer(@Valid CustomerRequest request) {
-        var customer = this.customerRepository
+        var customer = this._customerRepository
                 .findById(request.id())
                 .orElseThrow(() -> new CustomerNotFoundException(
                         format("No customer found: %s", request.id())
                 ));
         mergeCustomer(customer, request);
-        this.customerRepository.save(customer);
+        this._customerRepository.save(customer);
     }
 
     private void mergeCustomer(Customer customer, @Valid CustomerRequest request) {
@@ -56,24 +56,23 @@ public class CustomerService {
     }
 
     public List<CustomerResponse> findAllCustomers() {
-        List<CustomerResponse> customers = this.customerRepository
+        return this._customerRepository
                 .findAll()
                 .stream()
-                .map(customerMapper::fromCustomer)
+                .map(this._customerMapper::fromCustomer)
                 .collect(Collectors.toList());
-        return customers;
     }
 
     public CustomerResponse findCustomerById(String customerId) {
-        return this.customerRepository
+        return this._customerRepository
                 .findById(customerId)
-                .map(this.customerMapper::fromCustomer)
+                .map(this._customerMapper::fromCustomer)
                 .orElseThrow(() ->
                         new CustomerNotFoundException(format("Customer not found: %s", customerId))
                 );
     }
 
     public void deleteCustomer(String customerId) {
-        this.customerRepository.deleteById(customerId);
+        this._customerRepository.deleteById(customerId);
     }
 }

@@ -16,18 +16,18 @@ import java.util.List;
 @RequestMapping("api/v1/products")
 public class ProductController {
     @Autowired
-    ProductService productService;
+    private ProductService _productService;
 
     @PostMapping
     public ResponseEntity<Integer> createProduct(@RequestBody @Valid ProductRequest request) {
-        return ResponseEntity.ok(this.productService.createProduct(request));
+        return ResponseEntity.ok(this._productService.createProduct(request));
     }
 
     @PostMapping("/purchase")
     public ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(
             @RequestBody List<ProductPurchaseRequest> request
     ) {
-        return ResponseEntity.ok(this.productService.purchaseProducts(request));
+        return ResponseEntity.ok(this._productService.purchaseProducts(request));
     }
 
     @PutMapping
@@ -37,12 +37,12 @@ public class ProductController {
 
     @GetMapping("/{product-id}")
     public ResponseEntity<ProductResponse> findProductById(@PathVariable("product-id") String productId) {
-        return ResponseEntity.ok(this.productService.findById(productId));
+        return ResponseEntity.ok(this._productService.findById(productId));
     }
 
     @GetMapping
     public ResponseEntity<List<ProductResponse>> findAllProducts() {
-        return ResponseEntity.ok(this.productService.findAll());
+        return ResponseEntity.ok(this._productService.findAll());
     }
 
     @DeleteMapping("/{product-id}")
