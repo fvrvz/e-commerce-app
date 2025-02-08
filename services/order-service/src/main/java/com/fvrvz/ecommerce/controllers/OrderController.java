@@ -28,7 +28,7 @@ public class OrderController {
         return ResponseEntity.ok(this._orderService.findAll());
     }
 
-    @GetMapping("/{order-id")
+    @GetMapping("/{order-id}")
     public ResponseEntity<OrderResponse> findById(@PathVariable("order-id") Integer orderId) {
         return ResponseEntity.ok(this._orderService.findById(orderId));
     }
