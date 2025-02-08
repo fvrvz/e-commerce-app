@@ -2,9 +2,13 @@ package com.fvrvz.ecommerce.services;
 
 import com.fvrvz.ecommerce.mappers.OrderLineMapper;
 import com.fvrvz.ecommerce.records.OrderLineRequest;
+import com.fvrvz.ecommerce.records.OrderLineResponse;
 import com.fvrvz.ecommerce.repositories.OrderLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderLineService {
@@ -17,5 +21,12 @@ public class OrderLineService {
     public Integer saveOrderLine(OrderLineRequest request) {
         var orderLine = this._orderLineMapper.toOrderLine(request);
         return this._orderLineRepository.save(orderLine).getId();
+    }
+
+    public List<OrderLineResponse> findAllByOrderId(Integer orderId) {
+        return this._orderLineRepository.findAllByOrderId(orderId)
+                .stream()
+                .map(this._orderLineMapper::toOrderLineResponse)
+                .collect(Collectors.toList());
     }
 }

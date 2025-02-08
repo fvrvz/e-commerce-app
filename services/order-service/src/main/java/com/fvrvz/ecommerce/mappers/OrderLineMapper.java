@@ -3,6 +3,7 @@ package com.fvrvz.ecommerce.mappers;
 import com.fvrvz.ecommerce.entities.Order;
 import com.fvrvz.ecommerce.entities.OrderLine;
 import com.fvrvz.ecommerce.records.OrderLineRequest;
+import com.fvrvz.ecommerce.records.OrderLineResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,5 +19,12 @@ public class OrderLineMapper {
                 )
                 .productId(request.productId())
                 .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(
+                orderLine.getId(),
+                orderLine.getQuantity()
+        );
     }
 }

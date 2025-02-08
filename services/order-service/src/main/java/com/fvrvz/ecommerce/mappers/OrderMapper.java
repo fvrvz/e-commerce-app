@@ -2,6 +2,7 @@ package com.fvrvz.ecommerce.mappers;
 
 import com.fvrvz.ecommerce.entities.Order;
 import com.fvrvz.ecommerce.records.OrderRequest;
+import com.fvrvz.ecommerce.records.OrderResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,5 +16,15 @@ public class OrderMapper {
                 .totalAmount(request.amount())
                 .paymentMethod(request.paymentMethod())
                 .build();
+    }
+
+    public OrderResponse fromOrder(Order order) {
+        return new OrderResponse(
+                order.getId(),
+                order.getReference(),
+                order.getTotalAmount(),
+                order.getPaymentMethod(),
+                order.getCustomerId()
+        );
     }
 }
