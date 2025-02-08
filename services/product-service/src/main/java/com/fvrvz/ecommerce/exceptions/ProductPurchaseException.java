@@ -1,7 +1,10 @@
 package com.fvrvz.ecommerce.exceptions;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class ProductPurchaseException extends RuntimeException {
-    public ProductPurchaseException(String msg) {
-        super(msg);
-    }
+    private final String msg;
 }
