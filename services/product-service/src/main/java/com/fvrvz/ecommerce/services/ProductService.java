@@ -7,8 +7,8 @@ import com.fvrvz.ecommerce.records.ProductPurchaseResponse;
 import com.fvrvz.ecommerce.records.ProductRequest;
 import com.fvrvz.ecommerce.records.ProductResponse;
 import com.fvrvz.ecommerce.repositories.ProductRepository;
+import com.fvrvz.ecommerce.utils.Merge;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class ProductService {
     @Autowired
     private ProductMapper _productMapper;
 
-    public Integer createProduct(@Valid ProductRequest request) {
+    public Integer createProduct(ProductRequest request) {
         var product = this._productMapper.toProduct(request);
         return this._productRepository.save(product).getId();
     }
@@ -63,7 +63,7 @@ public class ProductService {
         return purchasedProducts;
     }
 
-    public ProductResponse findById(String productId) {
+    public ProductResponse findById(Integer productId) {
         return this._productRepository.findById(productId)
                 .map(this._productMapper::toProductResponse)
                 .orElseThrow(() -> new EntityNotFoundException(format("Product not found with ID: %s", productId)));
@@ -73,5 +73,16 @@ public class ProductService {
         return this._productRepository.findAll()
                 .stream().map(this._productMapper::toProductResponse)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteProductById(Integer productId) {
+        this._productRepository.deleteById(productId);
+    }
+
+    public void updateProduct(ProductRequest request) {
+        var product = this._productRepository.findById(request.id())
+                .orElseThrow(() -> new EntityNotFoundException(format("Product not found with ID: %s", request.id())));
+        Merge.mergeProduct(product, request);
+        this._productRepository.save(product);
     }
 }

@@ -32,11 +32,12 @@ public class ProductController {
 
     @PutMapping
     public ResponseEntity<Void> updateProduct(@RequestBody @Valid ProductRequest request) {
-        return ResponseEntity.accepted().body(null);
+        this._productService.updateProduct(request);
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping("/{product-id}")
-    public ResponseEntity<ProductResponse> findProductById(@PathVariable("product-id") String productId) {
+    public ResponseEntity<ProductResponse> findProductById(@PathVariable("product-id") Integer productId) {
         return ResponseEntity.ok(this._productService.findById(productId));
     }
 
@@ -46,7 +47,8 @@ public class ProductController {
     }
 
     @DeleteMapping("/{product-id}")
-    public ResponseEntity<Void> deleteProductById(@PathVariable("product-id") String productId) {
-        return ResponseEntity.accepted().body(null);
+    public ResponseEntity<Void> deleteProductById(@PathVariable("product-id") Integer productId) {
+        this._productService.deleteProductById(productId);
+        return ResponseEntity.accepted().build();
     }
 }
