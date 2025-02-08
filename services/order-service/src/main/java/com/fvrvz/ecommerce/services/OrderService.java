@@ -1,6 +1,7 @@
 package com.fvrvz.ecommerce.services;
 
 import com.fvrvz.ecommerce.clients.CustomerClient;
+import com.fvrvz.ecommerce.clients.PaymentClient;
 import com.fvrvz.ecommerce.clients.ProductClient;
 import com.fvrvz.ecommerce.exceptions.BusinessException;
 import com.fvrvz.ecommerce.kafka.OrderProducer;
@@ -34,6 +35,9 @@ public class OrderService {
     @Autowired
     private OrderProducer _orderProducer;
 
+    @Autowired
+    private PaymentClient _paymentClient;
+
     public Integer createOrder(OrderRequest request) {
         var customer = this._customerClient.findCustomerById(request.customerId())
                 .orElseThrow(() -> new BusinessException("Cannot create order. No customer exist with ID: " + request.customerId()));
@@ -53,7 +57,15 @@ public class OrderService {
             ));
         }
 
-        // todo start payment process
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+
+        this._paymentClient.createPayment(paymentRequest);
 
         this._orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
