@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/orders")
 public class OrderController {
     @Autowired
-    OrderService orderService;
+    private OrderService _orderService;
 
     @PostMapping
     public ResponseEntity<Integer> createOrder(
             @RequestBody @Valid OrderRequest request
     ) {
-        return ResponseEntity.ok(this.orderService.createOrder(request));
+        return ResponseEntity.ok(this._orderService.createOrder(request));
     }
 }
