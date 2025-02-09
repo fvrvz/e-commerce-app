@@ -19,7 +19,7 @@ spring:
         value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
         properties:
           spring.json.trusted.packages: 'com.fvrvz.ecommerce'
-          spring.json.type.mapping: paymentConfirmation:com.fvrvz.ecommerce.records.PaymentNotificationRequest,orderConfirmation:com.fvrvz.ecommerce.records.OrderConfirmation
+          spring.json.type.mapping: paymentConfirmation:com.fvrvz.ecommerce.records.PaymentConfirmation,orderConfirmation:com.fvrvz.ecommerce.records.OrderConfirmation
     mail:
       host: localhost
       port: 1025
