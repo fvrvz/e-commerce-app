@@ -1,12 +1,12 @@
 spring:
   data:
     mongodb:
-      username: ${MONGODB_USERNAME}
-      password: ${MONGODB_PASSWORD}
+      username: admin
+      password: admin
       host: localhost
       port: 27017
-      database: ${MONGODB_CUSTOMER_SERVICE_DB}
-      authentication-database: ${MONGODB_CUSTOMER_SERVICE_AUTH_DB}
+      database: customer
+      authentication-database: admin
 server:
   port: 8090
 
