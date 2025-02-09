@@ -96,11 +96,17 @@ services:
       - microservices-net
     depends_on:
       - zookeeper
-
+  zipkin:
+    container_name: ms_zipkin
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices-net
+    restart: unless-stopped
 networks:
   microservices-net:
     driver: bridge
-
 volumes:
   postgres:
   pgadmin:
