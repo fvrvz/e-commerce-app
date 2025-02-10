@@ -25,8 +25,3 @@ spring:
         spring.json.type.mapping: orderConfirmation:com.fvrvz.ecommerce.records.OrderConfirmation
 server:
   port: 8070
-application:
-  config:
-    customer-url: http://localhost:8090/api/v1/customers
-    product-url: http://localhost:8050/api/v1/products
-    payment-url: http://localhost:8060/api/v1/payments
