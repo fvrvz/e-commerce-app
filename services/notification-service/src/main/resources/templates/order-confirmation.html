@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: left;
+            width: 100%;
+        }
+        .highlight {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+        }
+        .product-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .product-list th, .product-list td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .product-list th {
+            background-color: #f4f4f4;
+        }
+        ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        li {
+            margin-bottom: 10px; /* Adds space between each list item */
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                font-size: 22px;
+            }
+            .content {
+                font-size: 15px;
+            }
+            .product-list th, .product-list td {
+                font-size: 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            .header {
+                font-size: 18px;
+            }
+            .content {
+                font-size: 14px;
+            }
+            .product-list th, .product-list td {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        Order Confirmation
+    </div>
+
+    <div class="content">
+        <p>Dear <span class="highlight" th:text="${customerName}">Customer</span>,</p>
+        <p>Thank you for placing an order with us. We are happy to confirm the following order details:</p>
+
+        <ul>
+            <li><strong>Order Reference:</strong> <span class="highlight"
+                                                        th:text="${orderReference}">Order Reference</span></li>
+            <li><strong>Total Amount:</strong> <span class="highlight" th:text="${amount}">Amount</span></li>
+        </ul>
+
+        <h3>Product Details:</h3>
+        <table class="product-list">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}">Product Name</td>
+                <td th:text="${product.description}">Product Description</td>
+                <td th:text="${product.price}">Product Price</td>
+                <td th:text="${product.quantity}">Product Quantity</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p style="padding: 1rem 0">We will notify you once your order is dispatched. Thank you for choosing us!</p>
+    </div>
+
+    <div class="footer">
+        &copy; <span th:text="${#dates.format( #dates.createNow(), 'yyyy')}">2025</span> fvrvz | All rights
+        reserved.
+    </div>
+</div>
+
+</body>
+</html>
