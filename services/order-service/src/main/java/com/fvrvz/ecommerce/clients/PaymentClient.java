@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
-@FeignClient(
-        name = "payment-service",
-        url = "${application.config.payment-url}"
-)
+@FeignClient(name = "PAYMENT-SERVICE", path = "/api/v1/payments")
 public interface PaymentClient {
     @PostMapping
     Optional<ResponseEntity<Integer>> createPayment(PaymentRequest request);

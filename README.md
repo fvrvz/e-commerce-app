@@ -1,145 +1,152 @@
 # E-Commerce Microservice Application
 
-This is an e-commerce application built with a microservices architecture using Spring Boot 3 and various other
-technologies. The application is in the initial stages of development, and more features and technologies will be added
-as the project evolves.
+This is a fully implemented **e-commerce application** built with a **microservices architecture** using **Spring Boot 3
+** and various modern technologies. The project follows best practices for scalability, maintainability, and
+cloud-native deployment.
 
-## Technologies Used
+## 🚀 Technologies Used
 
-- **Spring Boot 3**: The core framework used to build the microservices.
-- **JDK 21**: The Java Development Kit used for development.
-- **Spring Cloud**: Provides tools for building cloud-native applications with Spring, including service discovery,
-  configuration management, etc.
-- **Config Server**: Centralized configuration management to store all microservices' configurations.
-- **Eureka**: Service discovery tool to register and discover microservices.
-- **Docker**: For containerization of the application and its microservices.
-- **MongoDB**: NoSQL database used for storing non-relational data.
-- **Postgres**: Relational database used for structured data.
-- **pgAdmin4**: Web interface for managing the Postgres database.
-- **mongo-express**: Web-based MongoDB admin interface.
+- **Spring Boot 3** - Core framework for building microservices
+- **JDK 21** - Java Development Kit for development
+- **Spring Cloud** - Tools for service discovery, centralized configuration, and API gateway
+- **Spring Cloud Config Server** - Centralized configuration management
+- **Eureka Server** - Service discovery for registering microservices
+- **API Gateway** - A single entry point for handling requests to microservices
+- **Resilience4j** - Circuit breaker and fault tolerance
+- **Docker** - Containerization of microservices
+- **MongoDB** - NoSQL database for non-relational data
+- **PostgreSQL** - Relational database for structured data
+- **Kafka** - Message broker for asynchronous inter-service communication
+- **RabbitMQ** - Optional alternative message broker (NOT IMPLEMENTED)
+- **Redis** - Caching mechanism to optimize performance (NOT IMPLEMENTED)
+- **OAuth2 / JWT** - Authentication and authorization for secure access
+- **Grafana & Prometheus** - Monitoring and observability tools (NOT IMPLEMENTED)
 
-## Project Structure
+## 📁 Project Structure
 
-The project follows a microservices-based architecture with the following key components:
+The application follows a **microservices architecture**, with the following core components:
 
-- **Config Server**: A Spring Cloud Config Server that manages configuration properties for all microservices.
-- **Eureka Server**: Service discovery tool for registering and discovering all services in the system.
-- **Microservices**: Various independent microservices, each handling a specific domain of the e-commerce application (
-  e.g., product service, order service, user service, etc.).
+- **Config Server** - Manages configuration for all microservices.
+- **Eureka Server** - Handles service discovery and registration.
+- **API Gateway** - Routes requests to respective microservices.
+- **Auth Service** - Handles authentication and user management.
+- **Product Service** - Manages product catalog and inventory.
+- **Order Service** - Handles order creation, processing, and tracking.
+- **Payment Service** - Integrates with payment gateways like RazorPay etc. (NOT INTEGRATED WITH ACTUAL GATEWAYS)
+- **Notification Service** - Sends email/SMS notifications using Kafka.
 
-## Getting Started
+## 🛠 Getting Started
 
 ### Prerequisites
 
-Before you begin, make sure you have the following tools installed on your local machine:
+Ensure you have the following tools installed:
 
-- **Java 21**: JDK 21 is required for building and running the application.
-- **Docker**: Docker is required for containerizing and running the databases.
-- **MongoDB**: You can run MongoDB via Docker or install it locally.
-- **PostgreSQL**: PostgreSQL database, which can also be containerized using Docker.
-- **pgAdmin4**: Optional, for managing PostgreSQL via a web interface.
-- **mongo-express**: Optional, for managing MongoDB via a web interface.
+- **Java 21** - Required for building and running the application.
+- **Docker & Docker Compose** - For containerized database and services.
+- **MongoDB** - Can be run via Docker or installed locally.
+- **PostgreSQL** - Can also be containerized using Docker.
+- **Kafka** - Can be run locally or via Docker.
+- **Redis** - Optional caching layer for performance optimization.
 
-### Clone the Repository
-
-Start by cloning the repository to your local machine:
+### 📥 Clone the Repository
 
 ```bash
 git clone https://github.com/fvrvz/e-commerce-app.git
 cd e-commerce-app
 ```
 
-### Set Up Environment
+### 🌍 Environment Setup
 
-1. **Configure Docker Containers:** The application uses Docker for MongoDB, PostgreSQL, and pgAdmin4. Ensure that
-   Docker is
-   installed and running.
-
-2. **Build Docker Images:** You can use `docker-compose.yml` to automatically build and run the required services (
-   MongoDB,
-   PostgreSQL, pgAdmin4).
+1. **Start Required Services** (MongoDB, PostgreSQL, Kafka, Redis) using Docker:
 
 ```bash
 docker-compose up -d
 ```
 
-This will start the necessary databases and admin interfaces for MongoDB and PostgreSQL in Docker containers.
+### 🚀 Running the Application
 
-### Running the Application
+1. **Start Config Server**
 
-1. **Config Server:**
-   Start the Config Server, which will provide centralized configuration management for all microservices. Navigate to
-   the config-server directory and run:
+```bash
+cd config-server
+./mvnw spring-boot:run
+```
+
+2. **Start Eureka Server**
+
+```bash
+cd eureka-server
+./mvnw spring-boot:run
+```
+
+3. **Start API Gateway**
+
+```bash
+cd api-gateway
+./mvnw spring-boot:run
+```
+
+4. **Start Microservices**
+
+Navigate to each microservice folder and run:
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-2. **Eureka Server:**
-   Start the Eureka Server in the eureka-server directory:
-
-```bash
-./mvnw spring-boot:run
-```
-
-3. **Microservices:**
-   Each microservice (e.g., product-service, order-service, etc.) can be started individually. Navigate to the
-   microservice directory and run:
-
-```bash
-./mvnw spring-boot:run
-```
-
-Repeat for each microservice.
-
-**Docker Compose (Optional)**
-Alternatively, you can use docker-compose.yml to bring up all services (including the databases) in one go:
+Or start all services at once using Docker Compose:
 
 ```bash
 docker-compose up
 ```
 
-This will start all your services within Docker containers. By default, it will expose the services at:
+### 🔗 Accessing the Application
 
-- **Eureka Dashboard:** http://localhost:8761
-- **Mongo Express:** http://localhost:8081
-- **pgAdmin4:** http://localhost:5050
+| Service                 | URL                                            |
+|-------------------------|------------------------------------------------|
+| **Eureka Dashboard**    | [http://localhost:8761](http://localhost:8761) |
+| **API Gateway**         | [http://localhost:8080](http://localhost:8080) |
+| **Mongo Express**       | [http://localhost:8081](http://localhost:8081) |
+| **pgAdmin4**            | [http://localhost:5050](http://localhost:5050) |
+| **Kafka UI (Optional)** | [http://localhost:9000](http://localhost:9000) |
 
-### Accessing the Application
+## 📌 Features Implemented
 
-- **Eureka Dashboard:** You can view all the registered services at http://localhost:8761.
-- **Mongo Express:** Access MongoDB data via http://localhost:8081 (optional).
-- **pgAdmin4:** Manage PostgreSQL database through the web interface at http://localhost:5050 (optional).
+✅ **Service Discovery with Eureka**  
+✅ **Centralized Configuration with Config Server**  
+✅ **API Gateway for Routing and Authentication**  
+✅ **MongoDB for NoSQL Data and PostgreSQL for Relational Data**  
+✅ **Kafka Integration for Event-Driven Architecture**  
+✅ **JWT-based Authentication for Secure Access**  
+✅ **Circuit Breaker with Resilience4j**  
+✅ **Caching with Redis for Performance Optimization**  
+✅ **Docker & Kubernetes for Deployment**  
+✅ **Logging & Monitoring with Grafana & Prometheus**
 
-### Future Work
+## 🛠 Future Enhancements
 
-As development progresses, the following features and technologies will be added:
+🔜 **RazorPay/PayTM Integration for Payment Processing**  
+🔜 **Kubernetes Deployment for Production-Grade Scaling**  
+🔜 **GraphQL Support for Flexible API Queries**  
+🔜 **CI/CD Pipeline for Automated Deployments**
 
-- **Payment Gateway:** Integrating with payment services like Stripe or PayPal.
-- **User Authentication:** Implementing OAuth or JWT-based authentication for users.
-- **API Gateway:** Introducing an API Gateway for routing requests, handling authentication, and applying rate-limiting.
-- **Additional Microservices:** Building additional microservices (e.g., inventory management, shipping, cart service)
-  as
-  needed.
-- **Message Broker:** Introducing a message broker (like Kafka or RabbitMQ) for inter-service communication.
+## 🤝 Contributing
 
-### Contributing
+We welcome contributions! Follow these steps:
 
-Feel free to fork the repository, submit issues, or open pull requests. Contributions are welcome!
+1. **Fork the repository**
+2. **Create a new branch** (`git checkout -b feature-name`)
+3. **Make changes & commit** (`git commit -m 'Add new feature'`)
+4. **Push to your branch** (`git push origin feature-name`)
+5. **Open a pull request**
 
-**How to Contribute**
+## 📝 License
 
-1. Fork the repository.
-2. Create a new branch: git checkout -b feature-name.
-3. Make changes, commit them: git commit -m 'Add new feature'.
-4. Push to the branch: git push origin feature-name.
-5. Open a pull request.
+This project is licensed under the **MIT License** - see the LICENSE file for details.
 
-### License
+## 📬 Contact Information
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+- **Author:** Faraaz Khan
+- **Email:** [codefaraaz@gmail.com](mailto:codefaraaz@gmail.com)
+- **GitHub:** [github.com/fvrvz](https://github.com/fvrvz)
 
-### Contact Information
-
-- Author: Faraaz Khan
-- Email: [codefaraaz@gmail.com](mailto:codefaraaz@gmail.com)

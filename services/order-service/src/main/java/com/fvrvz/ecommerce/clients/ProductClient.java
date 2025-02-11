@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Optional;
 
-@FeignClient(
-        name = "products-service",
-        url = "${application.config.product-url}"
-)
+@FeignClient(name = "PRODUCT-SERVICE", path = "/api/v1/products")
 public interface ProductClient {
     @PostMapping("/purchase")
     Optional<List<PurchaseResponse>> purchaseProducts(
